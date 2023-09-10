@@ -1,38 +1,48 @@
-import React from "react";
+import React, { FormEvent, useState } from "react";
 import Button from "@mui/material/Button";
 import SaveIcon from "@mui/icons-material/Save";
 import { AgeRatingSelect } from "../AgeRatingSelect/AgeRatingSelect";
 import { Movie } from "../../ts/interfaces";
 
 type EditMovieProps = {
+  id: number;
   title: string;
   description: string;
   ageRating: string;
-  updateMovieList: () => {};
+  editCurrentMovie: (id: number, updatedData: Partial<Movie>) => void;
 };
 
 export const EditMovie = ({
+  id,
   title,
   description,
   ageRating,
-  updateMovieList,
+  editCurrentMovie,
 }: EditMovieProps) => {
-  const updateFields = ({ title, description, ageRating }: Partial<Movie>) => {
-    console.log("Title", title);
-    console.log("description", description);
-    console.log("ageRating", ageRating);
+  const [editedMovie, setEditedMovie] = useState<Movie>({
+    id,
+    title,
+    description,
+    ageRating,
+  });
+
+  const updateFields = (fields: Partial<Movie>) => {
+    setEditedMovie((prev) => {
+      return { ...prev, ...fields };
+    });
   };
 
   const getFilterValue = (ageRating: string) => {
     updateFields({ ageRating });
   };
 
-  const onSubmit = () => {
-    console.log("edited movie");
+  const onSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    editCurrentMovie(id, editedMovie);
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} style={{ width: "100%" }}>
       <div className="movie-form">
         <h4>Film szerkesztése</h4>
         <div className="movie-fields">
@@ -41,7 +51,7 @@ export const EditMovie = ({
             <input
               type="text"
               name="title"
-              value={title}
+              value={editedMovie.title}
               autoFocus={true}
               required
               max={255}
@@ -52,9 +62,9 @@ export const EditMovie = ({
               name="title"
               cols={8}
               rows={5}
-              minLength={50}
+              minLength={3}
               maxLength={500}
-              value={description}
+              value={editedMovie.description}
               onChange={(event) =>
                 updateFields({ description: event.target.value })
               }
@@ -63,7 +73,7 @@ export const EditMovie = ({
             <AgeRatingSelect
               updateFilter={getFilterValue}
               required={true}
-              selectedAgeRating={ageRating}
+              selectedAgeRating={editedMovie.ageRating}
             />
           </div>
         </div>

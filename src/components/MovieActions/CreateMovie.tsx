@@ -27,7 +27,7 @@ export const CreateMovie = ({ updateMovieList }: CreateMovieProps) => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} style={{ width: "100%" }}>
       <div className="movie-form">
         <h4>Film létrehozása</h4>
         <div className="movie-fields">

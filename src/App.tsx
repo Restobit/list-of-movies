@@ -47,8 +47,12 @@ function App() {
     return <p>Hiba: {error}</p>;
   }
 
-  const showCreateMovie = () => {
-    setIsShowCreate(!isShowCreate);
+  const openCreateMovie = () => {
+    setIsShowCreate(true);
+  };
+
+  const closeCreateMovie = () => {
+    setIsShowCreate(false);
   };
 
   const updateFilter = (ageRating: string) => {
@@ -58,7 +62,23 @@ function App() {
   const addMovie = (newMovie: Movie) => {
     const updatedMovies = [...movies, newMovie];
     setMovies(updatedMovies);
-    showCreateMovie();
+    closeCreateMovie();
+  };
+
+  const editMovie = (id: number, updatedData: Partial<Movie>) => {
+    const updatedMovies = movies.map((movie) =>
+      movie.id === id ? { ...movie, ...updatedData } : movie
+    );
+    setMovies(updatedMovies);
+  };
+
+  const deleteMovie = (id: number) => {
+    const movieIndex = movies.findIndex((movie) => movie.id === id);
+    if (movieIndex !== -1) {
+      const updatedMovies = [...movies];
+      updatedMovies.splice(movieIndex, 1);
+      setMovies(updatedMovies);
+    }
   };
 
   return (
@@ -68,11 +88,15 @@ function App() {
         <Button
           variant="contained"
           startIcon={<AddCircleOutlineOutlinedIcon />}
-          onClick={showCreateMovie}
+          onClick={openCreateMovie}
         >
           Új film
         </Button>
-        <Modal isOpen={isShowCreate} onClose={showCreateMovie} showClose={true}>
+        <Modal
+          isOpen={isShowCreate}
+          onClose={closeCreateMovie}
+          showClose={true}
+        >
           <CreateMovie updateMovieList={addMovie} />
         </Modal>
       </div>
@@ -84,7 +108,12 @@ function App() {
           <p>Nincs ilyen film.</p>
         )}
         {filteredMovies.map((movie) => (
-          <MovieCard key={movie.id} {...movie} />
+          <MovieCard
+            key={movie.id}
+            {...movie}
+            editMovie={editMovie}
+            deleteMovie={deleteMovie}
+          />
         ))}
       </div>
     </div>

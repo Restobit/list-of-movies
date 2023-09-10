@@ -13,9 +13,16 @@ export const ShowMovie = ({
 }: EditMovieProps) => {
   return (
     <div className="show-movie">
-      <p>Film címe:{title}</p>
-      <p>Film leírása: {description}</p>
-      <p>Korhatár: {ageRating}</p>
+      <p>
+        <span>Film címe:</span>
+        {title}
+      </p>
+      <p>
+        <span>Film leírása:</span> {description}
+      </p>
+      <p>
+        <span>Korhatár:</span> {ageRating}
+      </p>
     </div>
   );
 };
