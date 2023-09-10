@@ -1,0 +1,35 @@
+.movie {
+  &-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto 1rem auto;
+  }
+
+  &-fields {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid rgb(186, 186, 186);
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+
+  &-input {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 1rem;
+    margin: 0 auto;
+
+    label {
+      margin: 0.5rem 0;
+    }
+    input {
+      width: 100%;
+    }
+  }
+}
