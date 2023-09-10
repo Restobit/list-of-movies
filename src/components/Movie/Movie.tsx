@@ -3,6 +3,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import IconButton from "@mui/material/IconButton";
+import classNames from "classnames";
 
 type MovieCardProps = {
   title: string;
@@ -15,11 +16,18 @@ export const MovieCard = ({
   description,
   ageRating,
 }: MovieCardProps) => {
+  const isAdultContent = ageRating === "18" || ageRating === "R";
   return (
     <div className="movie-card">
       <div className="movie-card-title">
         <p>{title}</p>
-        <span className="age-rating">{ageRating}</span>
+        <span
+          className={classNames("age-rating", {
+            "age-rating--red": isAdultContent,
+          })}
+        >
+          {ageRating}
+        </span>
       </div>
 
       <p className="movie-card-description">{description}</p>
