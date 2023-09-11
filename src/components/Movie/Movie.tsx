@@ -27,6 +27,7 @@ export const MovieCard = ({
   editMovie,
   deleteMovie,
 }: MovieCardProps) => {
+  //piros karikás korhatárok
   const isAdultContent = ageRating === "18" || ageRating === "R";
   const [isInfoShow, setIsInfoShow] = useState(false);
   const [isEditShow, setIsEditShow] = useState(false);
@@ -53,6 +54,7 @@ export const MovieCard = ({
     setIsDeleteShow(false);
   };
 
+  //Film tartalmának szerkesztése - id alapján megkeresi az adott filmet és frissíti a tartalmát
   const editCurrentMovie = (_id: number, updatedMovie: Partial<Movie>) => {
     editMovie(_id, updatedMovie);
     closeMovieEdit();

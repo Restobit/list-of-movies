@@ -14,6 +14,7 @@ export const Modal = ({ isOpen, onClose, showClose, children }: ModalProps) => {
     return null;
   }
 
+  //Modal-t bezáró gomb
   const ModalCloseButton = () => (
     <div className="modal-close">
       <IconButton aria-label="cancel" color="warning" onClick={onClose}>

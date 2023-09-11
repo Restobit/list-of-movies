@@ -2,6 +2,7 @@ import { API_URL } from "../constants/api";
 import { Movie } from "../ts/interfaces";
 import axios from "axios";
 
+//Local fejlesztéshez szükséges film adatok
 export const asyncFetchDummyMovies = async (): Promise<Movie[]> => {
   const dumyMovies: Movie[] = [
     {
@@ -22,6 +23,7 @@ export const asyncFetchDummyMovies = async (): Promise<Movie[]> => {
   return movies;
 };
 
+//Filmek lekérdezése
 export const asyncFetchMovies = async (): Promise<Movie[]> => {
   try {
     const response = await axios.get(`${API_URL}`);
@@ -32,6 +34,7 @@ export const asyncFetchMovies = async (): Promise<Movie[]> => {
   }
 };
 
+//Film létrehozása
 export const asyncCreateMovie = async (newMovie: Movie) => {
   try {
     const response = await axios.post(API_URL, newMovie);
@@ -42,6 +45,7 @@ export const asyncCreateMovie = async (newMovie: Movie) => {
   }
 };
 
+//Film szerkesztése / frissítése
 export const asyncUpdateMovie = async (
   id: number,
   updatedMovie: Partial<Movie>
@@ -55,6 +59,7 @@ export const asyncUpdateMovie = async (
   }
 };
 
+//Film törlése
 export const asyncDeleteMovie = async (id: number) => {
   try {
     const response = await axios.delete(`${API_URL}/${id}`);

@@ -31,13 +31,14 @@ export const EditMovie = ({
     });
   };
 
-  const getFilterValue = (ageRating: string) => {
+  //Korhatár érétékének lekérdezése
+  const getAgeRatingValue = (ageRating: string) => {
     updateFields({ ageRating });
   };
 
+  //Mentés gombra kattintása után id alapján frissítésre kerül az adott film a megadott adatokkal
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
-    console.log("edited", editedMovie);
     editCurrentMovie(_id, editedMovie);
   };
 
@@ -71,7 +72,7 @@ export const EditMovie = ({
             />
             <label>Korhatár</label>
             <AgeRatingSelect
-              updateFilter={getFilterValue}
+              getAgeRating={getAgeRatingValue}
               required={true}
               selectedAgeRating={editedMovie.ageRating}
             />

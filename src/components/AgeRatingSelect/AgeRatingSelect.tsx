@@ -1,16 +1,20 @@
 import React from "react";
 
 type AgeRatingSelectProps = {
-  updateFilter: (ageRating: string) => void;
+  getAgeRating: (ageRating: string) => void;
   required?: boolean;
   selectedAgeRating?: string;
 };
 
+/*
+Korhatár kiválasztó
+*/
 export const AgeRatingSelect = ({
-  updateFilter,
+  getAgeRating,
   required,
   selectedAgeRating,
 }: AgeRatingSelectProps) => {
+  /*Korhatárok*/
   const ageRatings = [
     { _id: 1, value: "none", title: "korhatár" },
     { _id: 2, value: "12", title: "12" },
@@ -19,15 +23,16 @@ export const AgeRatingSelect = ({
     { _id: 5, value: "R", title: "R" },
   ];
 
-  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    updateFilter(event.target.value);
+  //korhatár kiválasztás kezelés
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    getAgeRating(event.target.value);
   };
 
   return (
     <div className="age-ratin-select">
       <select
-        onChange={(event) => handleFilterChange(event)}
-        required={required}
+        onChange={(event) => handleSelectChange(event)}
+        required={required ? required : false}
         defaultValue={selectedAgeRating ? selectedAgeRating : "none"}
       >
         {ageRatings.map((ageRating) => (

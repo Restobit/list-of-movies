@@ -1,5 +1,7 @@
 import React from "react";
+import Stack from "@mui/material/Stack";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import Button from "@mui/material/Button";
 
 type DeleteMovieProps = {
@@ -14,6 +16,7 @@ export const DeleteMovie = ({
   deleteMovie,
   onClose,
 }: DeleteMovieProps) => {
+  //Film törlése id alapján és modal bezárása
   const handleDeleteMovie = () => {
     deleteMovie(id);
     onClose();
@@ -26,15 +29,25 @@ export const DeleteMovie = ({
         Biztos, hogy törölni akarod a(z) <b>{title}</b> c. filmet?
       </p>
       <div className="action-buttons">
-        <Button
-          type="submit"
-          variant="contained"
-          color="warning"
-          startIcon={<DeleteOutlineOutlinedIcon />}
-          onClick={handleDeleteMovie}
-        >
-          Törlés
-        </Button>
+        <Stack direction="row" spacing={1}>
+          <Button
+            variant="contained"
+            color="info"
+            startIcon={<CancelOutlinedIcon />}
+            onClick={onClose}
+          >
+            Mégse
+          </Button>
+          <Button
+            type="submit"
+            variant="contained"
+            color="warning"
+            startIcon={<DeleteOutlineOutlinedIcon />}
+            onClick={handleDeleteMovie}
+          >
+            Törlés
+          </Button>
+        </Stack>
       </div>
     </div>
   );

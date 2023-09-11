@@ -8,16 +8,19 @@ type CreateMovieProps = {
   updateMovieList: (movie: Movie) => void;
 };
 
+//Film létrehozása
 export const CreateMovie = ({ updateMovieList }: CreateMovieProps) => {
   const [newMovie, setNewMovie] = useState<Movie | {}>({});
 
+  //Film mezőinek frissítése
   const updateFields = (fields: Partial<Movie>) => {
     setNewMovie((prev) => {
       return { ...prev, ...fields };
     });
   };
 
-  const getFilterValue = (ageRating: string) => {
+  //Korhatár érétékének lekérdezése
+  const getAgeRatingValue = (ageRating: string) => {
     updateFields({ ageRating });
   };
 
@@ -53,7 +56,7 @@ export const CreateMovie = ({ updateMovieList }: CreateMovieProps) => {
               }
             />
             <label>Korhatár</label>
-            <AgeRatingSelect updateFilter={getFilterValue} required={true} />
+            <AgeRatingSelect getAgeRating={getAgeRatingValue} required={true} />
           </div>
         </div>
       </div>

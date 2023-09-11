@@ -17,6 +17,11 @@ import "./App.scss";
 import "./style/styles.scss";
 
 function App() {
+  /*
+  Ha van működő https://crudcrud.com/ URL akkor cseréld ki a asyncFetchDummyMovies-t erre: asyncFetchMovies
+  illetve az URL-t cseréld ki az API_URL változóba ami a  src/constants/api.js fájlban van.
+  */
+
   const memoizedAsyncFetchMovies = useMemo(() => asyncFetchDummyMovies(), []);
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
@@ -114,7 +119,7 @@ function App() {
   return (
     <div className="App">
       <div className="nav">
-        <AgeRatingSelect updateFilter={updateFilter} />
+        <AgeRatingSelect getAgeRating={updateFilter} />
         <Button
           variant="contained"
           startIcon={<AddCircleOutlineOutlinedIcon />}

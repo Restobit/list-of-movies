@@ -6,6 +6,7 @@ type EditMovieProps = {
   ageRating: string;
 };
 
+//Adott film részleteinek megmutatása
 export const ShowMovie = ({
   title,
   description,
