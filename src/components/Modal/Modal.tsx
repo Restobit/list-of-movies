@@ -9,7 +9,7 @@ type ModalProps = {
   children?: React.ReactNode;
 };
 
-const Modal = ({ isOpen, onClose, showClose, children }: ModalProps) => {
+export const Modal = ({ isOpen, onClose, showClose, children }: ModalProps) => {
   if (!isOpen) {
     return null;
   }
@@ -33,5 +33,3 @@ const Modal = ({ isOpen, onClose, showClose, children }: ModalProps) => {
     </div>
   );
 };
-
-export default Modal;

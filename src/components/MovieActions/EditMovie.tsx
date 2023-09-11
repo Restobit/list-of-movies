@@ -5,22 +5,21 @@ import { AgeRatingSelect } from "../AgeRatingSelect/AgeRatingSelect";
 import { Movie } from "../../ts/interfaces";
 
 type EditMovieProps = {
-  id: number;
+  _id: number;
   title: string;
   description: string;
   ageRating: string;
-  editCurrentMovie: (id: number, updatedData: Partial<Movie>) => void;
+  editCurrentMovie: (_id: number, updatedData: Partial<Movie>) => void;
 };
 
 export const EditMovie = ({
-  id,
+  _id,
   title,
   description,
   ageRating,
   editCurrentMovie,
 }: EditMovieProps) => {
-  const [editedMovie, setEditedMovie] = useState<Movie>({
-    id,
+  const [editedMovie, setEditedMovie] = useState<Partial<Movie>>({
     title,
     description,
     ageRating,
@@ -38,7 +37,8 @@ export const EditMovie = ({
 
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
-    editCurrentMovie(id, editedMovie);
+    console.log("edited", editedMovie);
+    editCurrentMovie(_id, editedMovie);
   };
 
   return (

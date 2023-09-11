@@ -4,23 +4,23 @@ import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import IconButton from "@mui/material/IconButton";
 import classNames from "classnames";
-import Modal from "../Modal/Modal";
+import { Modal } from "../Modal/Modal";
 import { ShowMovie } from "../MovieActions/ShowMovie";
 import { EditMovie } from "../MovieActions/EditMovie";
 import { Movie } from "../../ts/interfaces";
 import { DeleteMovie } from "../MovieActions/DeleteMovie";
 
 type MovieCardProps = {
-  id: number;
+  _id: number;
   title: string;
   description: string;
   ageRating: string;
-  editMovie: (id: number, updatedData: Partial<Movie>) => void;
-  deleteMovie: (id: number) => void;
+  editMovie: (_id: number, updatedData: Partial<Movie>) => void;
+  deleteMovie: (_id: number) => void;
 };
 
 export const MovieCard = ({
-  id,
+  _id,
   title,
   description,
   ageRating,
@@ -53,8 +53,8 @@ export const MovieCard = ({
     setIsDeleteShow(false);
   };
 
-  const editCurrentMovie = (id: number, updatedMovie: Partial<Movie>) => {
-    editMovie(id, updatedMovie);
+  const editCurrentMovie = (_id: number, updatedMovie: Partial<Movie>) => {
+    editMovie(_id, updatedMovie);
     closeMovieEdit();
   };
 
@@ -103,7 +103,7 @@ export const MovieCard = ({
       <Modal isOpen={isEditShow} onClose={closeMovieEdit} showClose={true}>
         <EditMovie
           {...{
-            id,
+            _id,
             title,
             description,
             ageRating,
@@ -114,7 +114,7 @@ export const MovieCard = ({
 
       <Modal isOpen={isDeleteShow} onClose={closeMovieDelete} showClose={true}>
         <DeleteMovie
-          id={id}
+          id={_id}
           title={title}
           deleteMovie={deleteMovie}
           onClose={closeMovieDelete}
