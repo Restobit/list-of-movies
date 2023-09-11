@@ -75,6 +75,7 @@ export const EditMovie = ({
               getAgeRating={getAgeRatingValue}
               required={true}
               selectedAgeRating={editedMovie.ageRating}
+              disableEmptyValue={true}
             />
           </div>
         </div>

@@ -56,7 +56,11 @@ export const CreateMovie = ({ updateMovieList }: CreateMovieProps) => {
               }
             />
             <label>Korhatár</label>
-            <AgeRatingSelect getAgeRating={getAgeRatingValue} required={true} />
+            <AgeRatingSelect
+              getAgeRating={getAgeRatingValue}
+              required={true}
+              disableEmptyValue={true}
+            />
           </div>
         </div>
       </div>
