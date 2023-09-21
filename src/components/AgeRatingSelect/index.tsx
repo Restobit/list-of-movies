@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 type AgeRatingSelectProps = {
   getAgeRating: (ageRating: string) => void;
@@ -25,28 +25,49 @@ export const AgeRatingSelect = ({
     { _id: 5, value: "R", title: "R" },
   ];
 
+  useEffect(() => {
+    getAgeRating(selectedAgeRating ? selectedAgeRating : "none");
+
+    return () => {
+      getAgeRating("none");
+    };
+  }, []);
+
   /*
   Mivel ezt a komponenst használom a fejlécben (nav) is és ott szükséges, 
   hogy legyen egy üres lehetőség az összes film megjelenítéséhez
   viszont amikor új filmet akarunk hozzáadni vagy szerkeszteni szeretnénk 
   akkor ne lehessen üres korhatárt megadni
   */
-  const filteredAgeRatings =
-    disableEmptyValue === false
-      ? ageRatings
-      : ageRatings.filter((ageRating) => ageRating._id !== 1);
+  const filteredAgeRatings = !disableEmptyValue
+    ? ageRatings
+    : ageRatings.filter((ageRating) => ageRating._id !== 1);
 
   //korhatár kiválasztás kezelés
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    getAgeRating(event.target.value);
+    const selectedValue = event.target.value;
+    getAgeRating(selectedValue);
   };
+
+  //ha van külsőleg megadott korhatár érték akkor állítsa be arra, ha nincs akkor az alapértelmezett legyen vagyis none
+  const selectedAgeRatingOrNone = selectedAgeRating
+    ? selectedAgeRating
+    : "none";
+
+  /* 
+    ha nincs engedélyezve az üres érték (none) akkor a szűrt korhatár első eleme lesz kiválasztva, 
+    ha pedig engedélyezve van, akkor nézze meg, van-e külsőleg beállítás és ha nincs akkor legyen none
+  */
+  const defaultValue = disableEmptyValue
+    ? filteredAgeRatings[0].value
+    : selectedAgeRatingOrNone;
 
   return (
     <div className="age-ratin-select">
       <select
-        onChange={(event) => handleSelectChange(event)}
+        onChange={handleSelectChange}
         required={required ? required : false}
-        defaultValue={selectedAgeRating ? selectedAgeRating : "none"}
+        defaultValue={defaultValue}
       >
         {filteredAgeRatings.map((ageRating) => (
           <option value={ageRating.value} key={ageRating._id}>

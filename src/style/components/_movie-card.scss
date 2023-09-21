@@ -1,3 +1,5 @@
+@use "../abstracts/colors" as *;
+
 .movie-card {
   display: flex;
   flex-direction: column;
@@ -31,20 +33,19 @@
       margin-left: 0.5rem;
 
       &--red {
-        border-color: red;
+        border-color: $ageRatingRed;
       }
     }
   }
 
   &-description {
-    color: gray;
+    color: $description;
   }
 
   .movie-buttons {
     position: absolute;
     top: 5px;
     right: 5px;
-    border: 1px solid #a0a0a0;
     display: flex;
     justify-content: space-between;
     border-radius: 15px;

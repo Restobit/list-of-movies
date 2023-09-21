@@ -7,12 +7,15 @@ import {
   asyncFetchDummyMovies,
 } from "./services/asyncFetchServices";
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import { Movie } from "./ts/interfaces";
-import { MovieCard } from "./components/Movie/Movie";
-import { AgeRatingSelect } from "./components/AgeRatingSelect/AgeRatingSelect";
+import { MovieCard } from "./components/Movie";
+import { AgeRatingSelect } from "./components/AgeRatingSelect";
 import { CreateMovie } from "./components/MovieActions/CreateMovie";
-import { Modal } from "./components/Modal/Modal";
+import { Modal } from "./components/Modal";
 import "./App.scss";
 import "./style/styles.scss";
 
@@ -28,6 +31,7 @@ function App() {
   const [error, setError] = useState("");
   const [ageRatingFilter, setAgeRatingFilter] = useState("none");
   const [isShowCreate, setIsShowCreate] = useState(false);
+  const [theme, setTheme] = useState("light");
 
   const fetchMovies = async () => {
     try {
@@ -117,7 +121,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className={theme}>
       <div className="nav">
         <AgeRatingSelect getAgeRating={updateFilter} />
         <Button
@@ -127,6 +131,14 @@ function App() {
         >
           Új film
         </Button>
+
+        <IconButton
+          sx={{ ml: 4 }}
+          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+          color="inherit"
+        >
+          {theme === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+        </IconButton>
         <Modal
           isOpen={isShowCreate}
           onClose={closeCreateMovie}

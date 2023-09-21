@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from "react";
 import Button from "@mui/material/Button";
 import SaveIcon from "@mui/icons-material/Save";
-import { AgeRatingSelect } from "../AgeRatingSelect/AgeRatingSelect";
+import { AgeRatingSelect } from "../AgeRatingSelect";
 import { Movie } from "../../ts/interfaces";
 
 type CreateMovieProps = {
@@ -59,6 +59,7 @@ export const CreateMovie = ({ updateMovieList }: CreateMovieProps) => {
             <AgeRatingSelect
               getAgeRating={getAgeRatingValue}
               required={true}
+              selectedAgeRating={"12"}
               disableEmptyValue={true}
             />
           </div>

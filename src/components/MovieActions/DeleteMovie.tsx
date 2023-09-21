@@ -29,7 +29,7 @@ export const DeleteMovie = ({
         Biztos, hogy törölni akarod a(z) <b>{title}</b> c. filmet?
       </p>
       <div className="action-buttons">
-        <Stack direction="row" spacing={1}>
+        <Stack direction="row" spacing={2}>
           <Button
             variant="contained"
             color="info"

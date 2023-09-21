@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from "react";
 import Button from "@mui/material/Button";
 import SaveIcon from "@mui/icons-material/Save";
-import { AgeRatingSelect } from "../AgeRatingSelect/AgeRatingSelect";
+import { AgeRatingSelect } from "../AgeRatingSelect";
 import { Movie } from "../../ts/interfaces";
 
 type EditMovieProps = {

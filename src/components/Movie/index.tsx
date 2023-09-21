@@ -4,7 +4,7 @@ import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import IconButton from "@mui/material/IconButton";
 import classNames from "classnames";
-import { Modal } from "../Modal/Modal";
+import { Modal } from "../Modal";
 import { ShowMovie } from "../MovieActions/ShowMovie";
 import { EditMovie } from "../MovieActions/EditMovie";
 import { Movie } from "../../ts/interfaces";
