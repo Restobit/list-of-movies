@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
+import { ThemeContext } from "../../context/ThemeContext";
 
 type AgeRatingSelectProps = {
   getAgeRating: (ageRating: string) => void;
   required?: boolean;
   selectedAgeRating?: string;
-  disableEmptyValue?: boolean;
+  isDisableEmptyValue?: boolean;
 };
 
 /*
@@ -14,9 +15,11 @@ export const AgeRatingSelect = ({
   getAgeRating,
   required,
   selectedAgeRating,
-  disableEmptyValue = false,
+  isDisableEmptyValue = false,
 }: AgeRatingSelectProps) => {
-  /*Korhatárok*/
+  const { theme } = useContext(ThemeContext);
+
+  /* Korhatárok */
   const ageRatings = [
     { _id: 1, value: "none", title: "korhatár" },
     { _id: 2, value: "12", title: "12" },
@@ -34,12 +37,12 @@ export const AgeRatingSelect = ({
   }, []);
 
   /*
-  Mivel ezt a komponenst használom a fejlécben (nav) is és ott szükséges, 
+  Mivel ezt a komponenst használom a fejlécben (Navbar) is és ott szükséges, 
   hogy legyen egy üres lehetőség az összes film megjelenítéséhez
   viszont amikor új filmet akarunk hozzáadni vagy szerkeszteni szeretnénk 
-  akkor ne lehessen üres korhatárt megadni
+  akkor ne lehessen üres (none) korhatárt megadni
   */
-  const filteredAgeRatings = !disableEmptyValue
+  const filteredAgeRatings = !isDisableEmptyValue
     ? ageRatings
     : ageRatings.filter((ageRating) => ageRating._id !== 1);
 
@@ -49,21 +52,22 @@ export const AgeRatingSelect = ({
     getAgeRating(selectedValue);
   };
 
-  //ha van külsőleg megadott korhatár érték akkor állítsa be arra, ha nincs akkor az alapértelmezett legyen vagyis none
+  //ha van külsőleg megadott korhatár érték, akkor azt állítsa be arra, ha az sincs, akkor legyen az alapértelmezett (none)
   const selectedAgeRatingOrNone = selectedAgeRating
     ? selectedAgeRating
-    : "none";
+    : ageRatings[0].value;
 
   /* 
-    ha nincs engedélyezve az üres érték (none) akkor a szűrt korhatár első eleme lesz kiválasztva, 
-    ha pedig engedélyezve van, akkor nézze meg, van-e külsőleg beállítás és ha nincs akkor legyen none
+    ha nincs engedélyezve az üres érték (none) és nincs külsőleg megadott érték akkor a szűrt korhatár első eleme lesz kiválasztva, 
+    különben ha van külsőleg megadott korhatár érték, akkor azt állítsa be arra, ha az sincs, akkor legyen az alapértelmezett (none)
   */
-  const defaultValue = disableEmptyValue
-    ? filteredAgeRatings[0].value
-    : selectedAgeRatingOrNone;
+  const defaultValue =
+    isDisableEmptyValue && !selectedAgeRating
+      ? filteredAgeRatings[0].value
+      : selectedAgeRatingOrNone;
 
   return (
-    <div className="age-ratin-select">
+    <div className={`age-ratin-select age-ratin-select-${theme}`}>
       <select
         onChange={handleSelectChange}
         required={required ? required : false}

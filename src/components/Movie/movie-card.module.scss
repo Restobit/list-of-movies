@@ -1,4 +1,4 @@
-@use "../abstracts/colors" as *;
+@use "../../style/abstracts/colors" as *;
 
 .movie-card {
   display: flex;
@@ -42,7 +42,7 @@
     color: $description;
   }
 
-  .movie-buttons {
+  &-buttons {
     position: absolute;
     top: 5px;
     right: 5px;
@@ -50,5 +50,30 @@
     justify-content: space-between;
     border-radius: 15px;
     align-items: center;
+  }
+}
+
+.light {
+  background-color: $white;
+
+  .movie-card-buttons {
+    border: 1px solid $movieButtonsBorder;
+  }
+}
+
+.dark {
+  background-color: $navBgColorDark;
+
+  .movie-card-title {
+    color: $white;
+  }
+
+  .movie-card-description {
+    color: $descriptionDark;
+  }
+
+  .movie-card-buttons {
+    border: 1px solid $movieButtonsBorderDark;
+    background-color: $movieButtonsDark;
   }
 }

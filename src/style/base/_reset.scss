@@ -6,20 +6,8 @@
 }
 
 .light {
-  .nav {
-    background-color: $navBgColor;
-  }
-
   .container {
     background-color: $white;
-  }
-
-  .movie-card {
-    background-color: $white;
-
-    .movie-buttons {
-      border: 1px solid $movieButtonsBorder;
-    }
   }
 
   .modal {
@@ -28,33 +16,12 @@
 }
 
 .dark {
-  .nav {
-    background-color: $navBgColorDark;
-  }
-
   .container {
-    background-color: $dark;
-  }
-
-  .movie-card {
-    background-color: $navBgColorDark;
-
-    .movie-card-title {
-      color: $white;
-    }
-
-    .movie-card-description {
-      color: $descriptionDark;
-    }
-
-    .movie-buttons {
-      border: 1px solid $movieButtonsBorderDark;
-      background-color: $movieButtonsDark;
-    }
+    background-color: $dark700;
   }
 
   .modal {
-    background-color: $navBgColorDark;
+    background-color: $modalBackgroundDark;
     color: $white;
   }
 }

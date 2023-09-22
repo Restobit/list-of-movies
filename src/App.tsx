@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import {
   asyncCreateMovie,
   asyncFetchMovies,
@@ -6,32 +6,25 @@ import {
   asyncDeleteMovie,
   asyncFetchDummyMovies,
 } from "./services/asyncFetchServices";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+
 import { Movie } from "./ts/interfaces";
 import { MovieCard } from "./components/Movie";
-import { AgeRatingSelect } from "./components/AgeRatingSelect";
-import { CreateMovie } from "./components/MovieActions/CreateMovie";
-import { Modal } from "./components/Modal";
+import { Navbar } from "./components/Navbar";
 import "./App.scss";
 import "./style/styles.scss";
+import { ThemeContext } from "./context/ThemeContext";
 
 function App() {
   /*
   Ha van működő https://crudcrud.com/ URL akkor cseréld ki a asyncFetchDummyMovies-t erre: asyncFetchMovies
   illetve az URL-t cseréld ki az API_URL változóba ami a  src/constants/api.js fájlban van.
   */
-
+  const { theme } = useContext(ThemeContext);
   const memoizedAsyncFetchMovies = useMemo(() => asyncFetchDummyMovies(), []);
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [ageRatingFilter, setAgeRatingFilter] = useState("none");
-  const [isShowCreate, setIsShowCreate] = useState(false);
-  const [theme, setTheme] = useState("light");
 
   const fetchMovies = async () => {
     try {
@@ -61,20 +54,12 @@ function App() {
     return <p>Hiba: {error}</p>;
   }
 
-  const openCreateMovie = () => {
-    setIsShowCreate(true);
-  };
-
-  const closeCreateMovie = () => {
-    setIsShowCreate(false);
-  };
-
-  const updateFilter = (ageRating: string) => {
-    setAgeRatingFilter(ageRating);
-  };
-
   const addMovie = (newMovie: Movie) => {
-    const updatedMovies = [...movies, newMovie];
+    const movieWithNewID = {
+      ...newMovie,
+      _id: movies.length + 1,
+    };
+    const updatedMovies = [...movies, movieWithNewID];
     setMovies(updatedMovies);
 
     asyncCreateMovie(newMovie)
@@ -84,8 +69,6 @@ function App() {
       .catch((error) => {
         console.error("Film létrehozása sikertelen:", error);
       });
-
-    closeCreateMovie();
   };
 
   const editMovie = (id: number, updatedData: Partial<Movie>) => {
@@ -122,31 +105,7 @@ function App() {
 
   return (
     <div className={theme}>
-      <div className="nav">
-        <AgeRatingSelect getAgeRating={updateFilter} />
-        <Button
-          variant="contained"
-          startIcon={<AddCircleOutlineOutlinedIcon />}
-          onClick={openCreateMovie}
-        >
-          Új film
-        </Button>
-
-        <IconButton
-          sx={{ ml: 4 }}
-          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-          color="inherit"
-        >
-          {theme === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
-        </IconButton>
-        <Modal
-          isOpen={isShowCreate}
-          onClose={closeCreateMovie}
-          showClose={true}
-        >
-          <CreateMovie updateMovieList={addMovie} />
-        </Modal>
-      </div>
+      <Navbar setAgeRatingFilter={setAgeRatingFilter} addMovie={addMovie} />
       <div className="container">
         {(!movies || movies.length === 0) && <p>Nincsenek filmek.</p>}
 

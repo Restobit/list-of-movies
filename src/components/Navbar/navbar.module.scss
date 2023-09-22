@@ -1,0 +1,30 @@
+@use "../../style/abstracts/colors" as *;
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+
+  .theme-switch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    gap: 1rem;
+  }
+}
+
+.light {
+  background-color: $navBgColor;
+  .theme-switch-title {
+    color: $dark900;
+  }
+}
+
+.dark {
+  background-color: $navBgColorDark;
+
+  .theme-switch-title {
+    color: $white;
+  }
+}

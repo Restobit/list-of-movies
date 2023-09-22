@@ -10,6 +10,7 @@ type DeleteMovieProps = {
   deleteMovie: (id: number) => void;
   onClose: () => void;
 };
+
 export const DeleteMovie = ({
   id,
   title,

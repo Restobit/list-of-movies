@@ -6,10 +6,13 @@ import { Movie } from "../../ts/interfaces";
 
 type CreateMovieProps = {
   updateMovieList: (movie: Movie) => void;
+  closeModal: () => void;
 };
 
-//Film létrehozása
-export const CreateMovie = ({ updateMovieList }: CreateMovieProps) => {
+export const CreateMovie = ({
+  updateMovieList,
+  closeModal,
+}: CreateMovieProps) => {
   const [newMovie, setNewMovie] = useState<Movie | {}>({});
 
   //Film mezőinek frissítése
@@ -24,9 +27,11 @@ export const CreateMovie = ({ updateMovieList }: CreateMovieProps) => {
     updateFields({ ageRating });
   };
 
+  //Film létrehozása
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
     updateMovieList(newMovie as Movie);
+    closeModal();
   };
 
   return (
@@ -60,7 +65,7 @@ export const CreateMovie = ({ updateMovieList }: CreateMovieProps) => {
               getAgeRating={getAgeRatingValue}
               required={true}
               selectedAgeRating={"12"}
-              disableEmptyValue={true}
+              isDisableEmptyValue={true}
             />
           </div>
         </div>

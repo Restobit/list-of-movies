@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
@@ -9,6 +9,8 @@ import { ShowMovie } from "../MovieActions/ShowMovie";
 import { EditMovie } from "../MovieActions/EditMovie";
 import { Movie } from "../../ts/interfaces";
 import { DeleteMovie } from "../MovieActions/DeleteMovie";
+import styles from "./movie-card.module.scss";
+import { ThemeContext } from "../../context/ThemeContext";
 
 type MovieCardProps = {
   _id: number;
@@ -29,6 +31,8 @@ export const MovieCard = ({
 }: MovieCardProps) => {
   //piros karikás korhatárok
   const isAdultContent = ageRating === "18" || ageRating === "R";
+  const ageRatingRedClass = styles["age-rating--red"];
+  const { theme } = useContext(ThemeContext);
   const [isInfoShow, setIsInfoShow] = useState(false);
   const [isEditShow, setIsEditShow] = useState(false);
   const [isDeleteShow, setIsDeleteShow] = useState(false);
@@ -61,20 +65,20 @@ export const MovieCard = ({
   };
 
   return (
-    <div className="movie-card">
-      <div className="movie-card-title">
+    <div className={`${styles["movie-card"]} ${styles[theme]}`}>
+      <div className={styles["movie-card-title"]}>
         <p>{title}</p>
         <span
-          className={classNames("age-rating", {
-            "age-rating--red": isAdultContent,
+          className={classNames(styles["age-rating"], {
+            [`${ageRatingRedClass}`]: isAdultContent,
           })}
         >
           {ageRating}
         </span>
       </div>
 
-      <p className="movie-card-description">{description}</p>
-      <div className="movie-buttons">
+      <p className={styles["movie-card-description"]}>{description}</p>
+      <div className={styles["movie-card-buttons"]}>
         <IconButton aria-label="info" color="info" onClick={openMovieInfo}>
           <InfoOutlinedIcon />
         </IconButton>

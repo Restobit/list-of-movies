@@ -7,10 +7,21 @@
 
   select {
     width: 100%;
-    background-color: $selectBackground;
-    color: $white;
     font-size: 1rem;
     text-transform: uppercase;
     padding: 0 1rem;
+    color: $white;
+  }
+
+  &-light {
+    select {
+      background-color: $selectBackground;
+    }
+  }
+
+  &-dark {
+    select {
+      background-color: $dark900;
+    }
   }
 }

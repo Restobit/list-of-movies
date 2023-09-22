@@ -1,18 +1,34 @@
-/* color */
-$navBgColor: #98c0e9;
-$navBgColorDark: #424242;
+/* Colors */
+$red: red;
+$veryLightGray: #e0e0e0;
+$gray: gray;
+$lightGray: #d0d0d0;
+$blue: #1976d2;
+$lightBlue: #98c0e9;
 $white: #ffffff;
-$dark: #616161;
+$dark700: #616161;
+$dark800: #424242;
+$dark900: #212121;
+$blackTransparent07: rgba(0, 0, 0, 0.7);
 
-$selectBackground: #1976d2;
+/* Navbar */
+$navBgColor: $lightBlue;
+$navBgColorDark: $dark800;
 
-$modalOverlay: rgba(0, 0, 0, 0.7);
+/* Age rating select*/
+$selectBackground: $blue;
+
+/* Modal */
+$modalOverlay: $blackTransparent07;
 $modalBackground: $white;
+$modalBackgroundDark: $dark800;
 
-$ageRatingRed: red;
-$description: gray;
-$descriptionDark: #d0d0d0;
+/* Movie card */
+$ageRatingRed: $red;
+$description: $gray;
+$descriptionDark: $lightGray;
 
-$movieButtonsBorder: #a0a0a0;
-$movieButtonsBorderDark: #424242;
-$movieButtonsDark: #212121;
+/* Movie card buttons */
+$movieButtonsBorder: $veryLightGray;
+$movieButtonsBorderDark: $dark800;
+$movieButtonsDark: $dark900;
